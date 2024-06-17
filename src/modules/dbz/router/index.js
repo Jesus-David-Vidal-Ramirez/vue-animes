@@ -5,7 +5,7 @@ export default {
         {
             path: '',
             name: 'dbz',
-            component: () => import(/* webpackChunkName: "DbzPage" */ '../pages/Dbz.vue'),
+            component: () => import(/* webpackChunkName: "DbzPage" */ '../pages/DbzPersonajes.vue'),
         },
         // { 
         //     path: '/:pathMatch(.*)*', 
