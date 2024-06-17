@@ -70,31 +70,30 @@ import { getAkatsukis, searchGetAkatsukis } from "../../../helpers/naruto/getAka
 import InputSearch from "../../shared/components/InputSearch.vue";
 
 export default {
-  name: "NarutoPersonajes",
+  name: "NarutoAkatski",
   components: {
     InputSearch,
   },
   data() {
     return {
-      search: '',
-      akatsukis: [],
-      jutsu: [],
       akatsuki: '',
+      akatsukis: [],
       imagen: 0,
+      jutsu: [],
+      search: '',
       totalAkatsuki: 0,
     };
   },
 
   methods: {
     async mixAkatsuki() {
+
       const resp = await getAkatsukis();
-
       if (resp.error) return (this.akatsukis = resp);
-
       this.akatsukis = resp.akatsuki;
       this.totalakatsuki = this.akatsukis.total;
       //   this.totalakatsukiss =   Math.floor(this.akatsukis.total / 20)
-      console.log({ akatsukis });
+
     },
 
     jutsus(item) {
@@ -106,23 +105,15 @@ export default {
     async searchAkatsuki(name) {
 
       const resp = await searchGetAkatsukis(name);
-
       if (resp.error) return this.akatsukis = resp;
-
       this.akatsukis = resp.akatsuki;
-      console.log({ akatsuki: this.akatsukis });
-
 
     },
 
-    // nextImagen(index) {
-    //   this.personaje.characters[index].images.reverse()[0];
-    // },
   },
 
   watch: {
     search(event) {
-      console.log(event);
       this.searchAkatsuki(event);
 
     }

@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name:'inputSearch',
   props: {
     placeholder: {
       type: String,
@@ -27,11 +28,6 @@ export default {
     return {
       inputValue: this.search
     }
-  },
-  watch: {
-    // search(newValue, oldValue) {
-    //   // console.log('input' . newValue);
-    // }
   },
    methods: {
     updateValue() {

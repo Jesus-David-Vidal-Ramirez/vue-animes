@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'Pagination',
   props: {
     // placeholder: {
     //   type: String,

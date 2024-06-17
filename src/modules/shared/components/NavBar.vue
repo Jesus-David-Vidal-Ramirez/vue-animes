@@ -53,6 +53,7 @@
 import searchImgApi from "@/utils/searchImgApi";
 
 export default {
+  name:'navBar',
   linksImage: {
     type: Array,
     required: true,
