@@ -8,7 +8,6 @@
 
           <div class="col-12 d-flex justify-content-center">
             <div class="col-12">
-              <p>Message is: {{ search }}</p>
               <InputSearch placeholder="Buscar Akatsuki" v-model="search" />
               <input v-show="false" v-model="search" />
             </div>
