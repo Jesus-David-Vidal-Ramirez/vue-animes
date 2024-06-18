@@ -89,7 +89,7 @@ import { getPersonajesByIds } from "../../../helpers/naruto/getPersonajes";
 import InputSearch from "../../shared/components/InputSearch.vue";
 
 export default {
-  name: "NarutoPersonajes",
+  name: "NarutoClans",
   components: {
     InputSearch,
   },
@@ -113,19 +113,19 @@ export default {
       this.clanes = resp;
       this.totalClanes = this.clanes.total;
       //   this.totalclaness =   Math.floor(this.clanes.total / 20)
-      console.log({ clanes: this.clanes });
+      
     },
 
     async personajesByClan(item) {
+      
       const { characters, name } = item;
       const personajesArrResp = getPersonajesByIds(characters);
 
       if (personajesArrResp.error) return (this.personajes = personajesArrResp);
 
-      // personajesArrResp
+      
       this.personajes = [];
       this.clan = name;
-      console.log({ name, clan: this.clan });
       personajesArrResp
         .then((data) => {
           data.forEach((personaje) => {
@@ -135,22 +135,8 @@ export default {
         .catch((error) => {
           console.error("Error al obtener los datos:", error);
         });
-
-      console.log({ persona: this.personajes });
-
-      // this.personajes.forEach( personaje => {
-      //   console.log( personaje );
-      //   console.log( 'AJA NOJODA' );
-      // });
-      // this.personajes.map( i => {
-      //   console.log( i );
-      // })
-      // console.log( { personajes: this.personajes });
     },
 
-    // nextImagen(index) {
-    //   this.personaje.characters[index].images.reverse()[0];
-    // },
   },
 
   mounted() {
@@ -169,13 +155,6 @@ export default {
 .icon-footer g:hover {
   color: black;
 }
-carousel-control-prev {
-  background-color: transparent;
-}
-carousel-control-next {
-  background-color: transparent;
-}
-
 .info {
   list-style: none;
   padding: 0px;

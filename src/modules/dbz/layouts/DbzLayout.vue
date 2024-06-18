@@ -44,9 +44,8 @@ export default {
       links: [
         { to: "/home", name: "Home", id: 0 },
         { to: "dbz", name: "Personajes", id: 1 },
-        { to: "planet", name: "Planetas", id: 2 },
-        { to: "transformation", name: "Transformacion", id: 3 },
-        //   { to: "village", name: "villas", id: 4 },
+        { to: "dbzPlanet", name: "Planetas", id: 2 },
+        { to: "dbzTransformation", name: "Transformacion", id: 3 }
       ],
     };
   },

@@ -7,7 +7,7 @@
           <div class="container-fluid justify-content-center">
             <a class="navbar-brand" href="/">
               <img src="@/assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" />
-              Titles
+              Animes
             </a>
           </div>
         </nav>
@@ -50,6 +50,17 @@ export default {
   name: "HomeLayout",
   components: {
     NavBar,
+  },
+  props: {
+    // title: {
+    //   type: String,
+    //   default: 'Animes' 
+    // },
+  },
+  data() {
+    return {
+      
+    }
   },
 };
 </script>
