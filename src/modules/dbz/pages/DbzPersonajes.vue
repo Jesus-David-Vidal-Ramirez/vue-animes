@@ -2,15 +2,24 @@
 
 
   <section class="container text-center">
-    <h1>DBZ Personajes</h1>
-    <h5 v-for="item in personajes.items">
-      {{  item.name }}
-    </h5>
+    
     <!-- <b-card   v-for="(item, index) in personaje.characters" -->
     <div class="row d-block mt-5">
       <div class="col mb-5">
         <div class="row">
-
+          <!-- <div v-if="personajes.items">
+            <Pagination 
+            :rows=personajes.meta.totalPages
+            :perPage=personajes.meta.currentPage
+            :currentPage=personajes.meta.totalPages
+            @click="onPagina"
+            ></Pagination>
+          </div> -->
+          <div>
+            
+            <button @click="prevPagination(personajes.links.previous)"> < </button>
+            <button @click="nextPagination(personajes.links.next)"> > </button>
+          </div>
           <div class="col-12 d-flex justify-content-center">
             <div class="col-8">
               
@@ -22,18 +31,22 @@
           <div class="col-md-12 derecha">
             <div class="content d-flex flex-wrap justify-content-around">
 
-              <!-- <div v-if="personaje.error">
+              <div v-if="personajes.items == []">
                 <h3>
-                  {{ personaje.error }}
+                  <!-- {{ personaje.error }} -->
+                    Informacion Vacia
                 </h3>
-              </div> -->
+              </div>
 
               <div>
-                <b-card no-body class="m-4" style="max-width: 550px">
+                <b-card no-body class="m-4" style="max-width: 550px" v-for="item in personajes.items"
+                :key="item.id">
                   <b-row no-gutters>
                     <b-col md="6" class="d-flex justify-content-center align-items-center">
                       <div>
-                        <b-card-img
+                        <b-card-img :src="item.image ??
+                          '/src/assets/img/no-image-available.png'"
+                           :alt="item.name" :key="item.id"
                           class="img rounded-0"></b-card-img>
                         <!-- <div v-if="item.images.length >= 2">
                           <svg @click="nextImagen(index)" xmlns="http://www.w3.org/2000/svg" width="46" height="46"
@@ -46,7 +59,7 @@
                       </div>
                     </b-col>
                     <b-col md="6">
-                      <b-card-body title="titulo" class="pt-4">
+                      <b-card-body :title="item.name" class="pt-4">
                         <b-card-text class="pt-3">
 
                         </b-card-text>
@@ -61,6 +74,8 @@
               </div>
             </div>
           </div>
+          
+          
         </div>
       </div>
     </div>
@@ -68,7 +83,7 @@
 </template>
 
 <script>
-import { getPersonajes } from "../../../helpers/dbz/getPersonajes";
+import { getPaginationPersonaje, getPersonajes } from "../../../helpers/dbz/getPersonajes";
 import InputSearch from "../../shared/components/InputSearch.vue";
 import Pagination from "../../shared/components/Pagination.vue";
 
@@ -101,6 +116,28 @@ export default {
       console.log({ personaje: this.personajes });
     },
 
+    async nextPagination( url ) {
+
+      const data = await getPaginationPersonaje( url);
+      
+      // TODO enviar alerta de que no hay personajes
+      if (data.error) return "";
+      
+      this.personajes = data;
+      
+      console.log( this.personajes );    
+    },
+
+    async prevPagination( url ) {
+      
+      const data = await getPaginationPersonaje( url);
+      
+      // TODO enviar alerta de que no hay personajes
+      if (data.error) return "";
+      
+      this.personajes = data;  
+      
+    }
   //   nextImagen(index) {
   //     this.personaje.characters[index].images.reverse()[0];
   //   },
