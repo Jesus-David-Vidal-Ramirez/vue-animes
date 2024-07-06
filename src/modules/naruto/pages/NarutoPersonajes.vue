@@ -60,7 +60,8 @@
                         </b-card-text>
                         <b-card-footer class="h2 mb-0">
                           <b-icon icon="exclamation-circle-fill" variant="secondary" class="m-2 icon-footer"></b-icon>
-                          <b-icon icon="heart-fill" variant="secondary" class="m-2 icon-footer"></b-icon>
+                          <!-- <b-icon icon="heart-fill" variant="secondary" class="m-2 icon-footer"></b-icon> -->
+                          <b-icon icon="heart-fill" :variant="getVariant(item.id)" class="m-2 icon-footer" @click="stateFavorite(item.id)" :id="item.id"></b-icon>
                         </b-card-footer>
                       </b-card-body>
                     </b-col>
@@ -95,6 +96,7 @@ export default {
       personaje: [],
       imagen: 0,
       totalPersonajes: 0,
+      variant: [],
     };
   },
 
@@ -123,6 +125,14 @@ export default {
       if (resp.error) return this.personaje = resp;
       this.personaje = resp;
 
+    },
+
+    getVariant(index){
+      return this.variant[index] ? 'danger' : 'secondary';
+    },
+
+    stateFavorite( index){
+      this.$set(this.variant, index, !this.variant[index]);
     },
 
   },
