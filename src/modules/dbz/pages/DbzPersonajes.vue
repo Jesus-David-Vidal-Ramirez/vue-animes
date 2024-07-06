@@ -22,7 +22,6 @@
           </div>
           <div class="col-12 d-flex justify-content-center">
             <div class="col-8">
-              
               <InputSearch placeholder="Buscar Personajes" v-model="search" />
               <input v-show="false" v-model="search" />
             </div>
@@ -31,15 +30,14 @@
           <div class="col-md-12 derecha">
             <div class="content d-flex flex-wrap justify-content-around">
 
-              <div v-if="personajes.items == []">
+              <div v-if="!personajes.items">
                 <h3>
-                  <!-- {{ personaje.error }} -->
                     Informacion Vacia
                 </h3>
               </div>
 
               <div>
-                <b-card no-body class="m-4" style="max-width: 550px" v-for="item in personajes.items"
+                <b-card no-body class="m-4" style="max-width: 550px" v-for="(item, index) in personajes.items"
                 :key="item.id">
                   <b-row no-gutters>
                     <b-col md="6" class="d-flex justify-content-center align-items-center">
@@ -48,24 +46,27 @@
                           '/src/assets/img/no-image-available.png'"
                            :alt="item.name" :key="item.id"
                           class="img rounded-0"></b-card-img>
-                        <!-- <div v-if="item.images.length >= 2">
-                          <svg @click="nextImagen(index)" xmlns="http://www.w3.org/2000/svg" width="46" height="46"
-                            fill="currentColor" class="icon bi bi-arrow-right-square" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                              d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-                          </svg>
-                        </div> -->
-
                       </div>
                     </b-col>
-                    <b-col md="6">
-                      <b-card-body :title="item.name" class="pt-4">
-                        <b-card-text class="pt-3">
+                    <b-col md="6" class="my-auto">
+                      <b-card-body class="pt-4">
+                        <h4> {{ item.name }} ( {{ item.race }})</h4>
 
+                        <b-card-text v-if="item.description.length <= 400" class="pt-3">
+                          {{ item.description }}
                         </b-card-text>
+                        
+                        <b-card-text v-else class="pt-3">
+                          {{ item.description.slice(0,getSlice(item.id)) }}.
+                         <br>
+                          <span class="badge text-bg-info" @click="verDescripcion(item.id)" :id="item.id"> {{ getDescripcion(item.id) }} </span>
+                        </b-card-text>
+
                         <b-card-footer class="h2 mb-0">
-                          <b-icon icon="exclamation-circle-fill" variant="secondary" class="m-2 icon-footer"></b-icon>
-                          <b-icon icon="heart-fill" variant="secondary" class="m-2 icon-footer"></b-icon>
+                          <h6 class="mt-3">Poder Maximo: <span v-if="item.maxKi != 'unknown'">{{  item.maxKi }} </span> <span v-else>Desconocido</span> </h6>
+                          <h6>Poder Minimo:  <span v-if="item.ki != 'unknown'">{{  item.ki }} </span> <span v-else>Desconocido</span> </h6>
+                          <!-- <b-icon icon="exclamation-circle-fill" variant="secondary" class="m-2 icon-footer"></b-icon> -->
+                          <b-icon icon="heart-fill" :variant="getVariant(item.id)" class="m-2 icon-footer" @click="stateFavorite(item.id)" :id="item.id"></b-icon>
                         </b-card-footer>
                       </b-card-body>
                     </b-col>
@@ -74,8 +75,6 @@
               </div>
             </div>
           </div>
-          
-          
         </div>
       </div>
     </div>
@@ -83,7 +82,7 @@
 </template>
 
 <script>
-import { getPaginationPersonaje, getPersonajes } from "../../../helpers/dbz/getPersonajes";
+import { getPaginationPersonaje, getPersonajeSearch, getPersonajes } from "../../../helpers/dbz/getPersonajes";
 import InputSearch from "../../shared/components/InputSearch.vue";
 import Pagination from "../../shared/components/Pagination.vue";
 
@@ -94,6 +93,14 @@ export default {
     Pagination,
   },
   props: {
+    // description:{
+    //   type: Boolean,
+    //   default: false
+    // }
+    // ver:{
+    //   type: String,
+    //   default: 'Ver Mas..'
+    // }
   },
   data() {
     return {
@@ -101,6 +108,9 @@ export default {
       personajes: [],
       imagen: 0,
       totalPersonajes: 0,
+      slice: [],
+      variant: [],
+      ver: []
     };
   },
 
@@ -137,31 +147,65 @@ export default {
       
       this.personajes = data;  
       
-    }
+    },
+
+    getSlice(index){
+      return this.slice[index] ? -1 : 400 ;
+    },
+
+    getDescripcion( index ){
+      return this.ver[index] ? 'Ver Menos' : 'Ver Mas...';
+    },
+    
+    verDescripcion( index ){
+      this.$set(this.slice, index, !this.slice[index]);
+      this.$set(this.ver, index, !this.ver[index]);
+    },
+
+    getVariant(index){
+      return this.variant[index] ? 'danger' : 'secondary';
+    },
+
+    stateFavorite( index){
+      this.$set(this.variant, index, !this.variant[index]);
+    },
+
   //   nextImagen(index) {
   //     this.personaje.characters[index].images.reverse()[0];
   //   },
 
-  //   // Recbimos el nombre para la comparacion
-  //   async searchPersonajes(name) {
+    // Recbimos el nombre para la comparacion
+    async searchPersonajes(name) {
 
-  //     const resp = await searchGetPersonajes(name);
-  //     console.log({ respuesta: resp });
-  //     if (resp.error) return this.personaje = resp;
+      const resp = await getPersonajeSearch(name);
+      console.log({ respuesta: resp });
+      if (resp.error) return this.personajes = resp;
+      
+      // const personajes = [];
+      // personajes.push(resp);
+      // console.log(personajes);
 
-  //     this.personaje = resp;
-  //     // this.totalPersonajes = this.personaje.total;
+      this.personajes = {items: resp, links: {previous:null,next:null} };
+      
+      console.log( this.personajes );
+      
+      
 
-  //     // console.log({ personaje: this.personaje });
-  //   },
+
+      // this.totalPersonajes = this.personaje.total;
+
+      // console.log({ personaje: this.personaje });
+    },
 
 
-  // },
+  },
 
-  // watch: {
-  //   search(event) {
-  //     const data = this.searchPersonajes(event);
-  //   }
+  watch: {
+    search(event) {
+      console.log( event);
+      this.searchPersonajes(event);
+      
+    }
   },
 
   mounted() {
@@ -197,6 +241,16 @@ export default {
 
 .img {
   margin: 1.5rem
+}
+
+.badge {
+  cursor:pointer;
+  margin-top: 1.5em;
+  transform: scale(1.1);
+}
+
+.badge:hover {
+  transform: scale(1.2);
 }
 
 @media (max-width: 769px) {
