@@ -4,11 +4,11 @@
             <InputSearch placeholder="Buscar Planeta" v-model="search" />
             <input v-show="false" v-model="search" />
             <div class="scrollarea m-4 p-3">
-                <!-- <div v-if="planets">
+                <div v-if="planets.error">
                     <h3>
                         Informacion no encontrada
                     </h3>
-                </div> -->
+                </div>
                 <div>
                     <b-card no-body class="overflow-hidden m-4" style="max-width: 550px"
                         v-for="(item, index) in planets.items" :key="item.id">
@@ -92,12 +92,15 @@ export default {
 
             const resp = await getPlanetasSearch(name);
             if (resp.error) return this.planets = resp;
-
+            
+            if( !resp.length && !resp.items ){
+                return this.planets = { error: true};
+            }
             if (resp.items == undefined) {
                 this.planets = { items: resp, links: { previous: null, next: null } };
                 return this.planets;
             }
-
+            
             this.planets = { items: resp.items, links: { previous: null, next: null } };
         },
 
