@@ -34,17 +34,17 @@ const getTransformations = async () => {
   
 // };
 
-// const getPersonajeSearch = async ( name ) => {
-//   try {
-//     const personaje = await dbzapi.get(`/characters?name=${name}`);
-//     return personaje.data;
-//   } catch (error) {
-//     return { error: "Error al cargar personajes" };
-//   }
-// };
+const getTransformationsSearch = async ( name ) => {
+  try {
+    const transformations = await dbzapi.get(`/transformations?name=${name}`);
+    return transformations.data;
+  } catch (error) {
+    return { error: "Error al cargar personajes" };
+  }
+};
 
 export {
   getTransformations,
+  getTransformationsSearch,
     // getPaginationPersonaje,
-    // getPersonajeSearch
 }
