@@ -1,14 +1,14 @@
 <template>
     <div class="col-12 d-flex justify-content-center">
         <section>
-            <InputSearch placeholder="Buscar Planeta" v-model="search"/>
+            <InputSearch placeholder="Buscar Planeta" v-model="search" />
             <input v-show="false" v-model="search" />
             <div class="scrollarea m-4 p-3">
-                <div v-if="planets.error">
-            <h3>
-              {{ planets.error }}
-            </h3>
-          </div>
+                <!-- <div v-if="planets">
+                    <h3>
+                        Informacion no encontrada
+                    </h3>
+                </div> -->
                 <div>
                     <b-card no-body class="overflow-hidden m-4" style="max-width: 550px"
                         v-for="(item, index) in planets.items" :key="item.id">
@@ -16,13 +16,13 @@
                             <b-col class="">
                                 <div class="m-4">
                                     <h1> {{ item.name }}</h1>
-                                    <span>Destruido: {{  item.isDestroyed ? 'Si':'No' }}</span>
+                                    <span>Destruido: {{ item.isDestroyed ? 'Si' : 'No' }}</span>
                                     <b-card-img :src="item.image ??
                                         '/src/assets/img/no-image-available.png'" :alt="item.name" :key="item.id"
                                         class="img rounded-0"></b-card-img>
-                                        <b-card-text class="pt-3">
-                                            {{  item.description }}
-                                        </b-card-text>
+                                    <b-card-text class="pt-3">
+                                        {{ item.description }}
+                                    </b-card-text>
                                 </div>
                             </b-col>
                         </b-row>
@@ -35,12 +35,12 @@
     </div>
 </template>
 <script>
-import { getPlanetas } from '../../../helpers/dbz/getPlanetas';
+import { getPlanetas, getPlanetasSearch } from '../../../helpers/dbz/getPlanetas';
 import InputSearch from '../../shared/components/InputSearch.vue';
 
 export default {
     name: 'DbzPlanets',
-    components:{
+    components: {
         InputSearch
     },
     data() {
@@ -58,11 +58,10 @@ export default {
     methods: {
         async mixPlanets() {
             const resp = await getPlanetas();
+            console.log({ respuesta: resp });
 
             if (resp.error) return (this.planets = resp);
-
             this.planets = resp;
-            console.log(this.planets);
             // this.totalClanes = this.clanes.total;
             //   this.totalclaness =   Math.floor(this.clanes.total / 20)
 
@@ -89,13 +88,26 @@ export default {
         //         });
         // },
 
+        async searchPlanetas(name) {
+
+            const resp = await getPlanetasSearch(name);
+            if (resp.error) return this.planets = resp;
+
+            if (resp.items == undefined) {
+                this.planets = { items: resp, links: { previous: null, next: null } };
+                return this.planets;
+            }
+
+            this.planets = { items: resp.items, links: { previous: null, next: null } };
+        },
+
     },
     watch: {
         search(event) {
-      console.log( event);
-    //   this.searchPersonajes(event);
-      
-    }
+
+            this.searchPlanetas(event);
+
+        }
     },
     mounted() {
         this.mixPlanets();

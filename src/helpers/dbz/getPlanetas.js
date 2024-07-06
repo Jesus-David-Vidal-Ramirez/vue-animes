@@ -2,7 +2,7 @@ import dbzapi from "../../api/dbz/dbzApi";
 
 const getPlanetas = async () => {
   try {
-    const planets = await dbzapi.get(`/planets?page=1&limit=20`);
+    const planets = await dbzapi.get(`/planets?page=1&limit=100`);
     return planets.data;
   } catch (error) {
     return { error: "Error al cargar planetas" };
@@ -34,17 +34,17 @@ const getPlanetas = async () => {
   
 // };
 
-// const getPersonajeSearch = async ( name ) => {
-//   try {
-//     const personaje = await dbzapi.get(`/characters?name=${name}`);
-//     return personaje.data;
-//   } catch (error) {
-//     return { error: "Error al cargar personajes" };
-//   }
-// };
+const getPlanetasSearch = async ( name ) => {
+  try {
+    const planets = await dbzapi.get(`/planets?name=${name}`);
+    return planets.data;
+  } catch (error) {
+    return { error: "Error al cargar personajes" };
+  }
+};
 
 export {
     getPlanetas,
     // getPaginationPersonaje,
-    // getPersonajeSearch
+    getPlanetasSearch
 }
