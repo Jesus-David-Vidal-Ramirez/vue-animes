@@ -60,7 +60,6 @@
                         </b-card-text>
                         <b-card-footer class="h2 mb-0">
                           <b-icon icon="exclamation-circle-fill" variant="secondary" class="m-2 icon-footer"></b-icon>
-                          <!-- <b-icon icon="heart-fill" variant="secondary" class="m-2 icon-footer"></b-icon> -->
                           <b-icon icon="heart-fill" :variant="getVariant(item.id)" class="m-2 icon-footer" @click="stateFavorite(item.id)" :id="item.id"></b-icon>
                         </b-card-footer>
                       </b-card-body>
