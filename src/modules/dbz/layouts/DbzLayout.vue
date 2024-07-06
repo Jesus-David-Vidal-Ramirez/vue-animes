@@ -83,7 +83,7 @@ a.router-link-exact-active {
 
   .menu {
     position: sticky;
-    top: 10px;
+    top: -1px;
     z-index: 4;
     margin-top: -1rem;
     margin-bottom: 1rem;
