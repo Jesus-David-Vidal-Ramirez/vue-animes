@@ -5,7 +5,17 @@ export default {
         {
             path: '',
             name: 'dbz',
-            component: () => import(/* webpackChunkName: "DbzPage" */ '../pages/Dbz.vue'),
+            component: () => import(/* webpackChunkName: "DbzPersonajes" */ '../pages/DbzPersonajes.vue'),
+        },
+        {
+            path: '/dbzPlanet',
+            name: 'dbzPlanet',
+            component: () => import(/* webpackChunkName: "DbzPlantes" */ '../pages/DbzPlanets.vue'),
+        },
+        {
+            path: '/dbzTransformation',
+            name: 'dbzTransformation',
+            component: () => import(/* webpackChunkName: "DbzTransformation" */ '../pages/DbzTransformation.vue'),
         },
         // { 
         //     path: '/:pathMatch(.*)*', 

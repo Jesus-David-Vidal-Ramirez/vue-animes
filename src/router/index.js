@@ -5,6 +5,7 @@ import Test from "@/modules/shared/components/Test.vue";
 
 import naruto from '../modules/naruto/router';
 import dbz from '../modules/dbz/router';
+import pokemon from '../modules/pokemon/router';
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,10 @@ const router = new VueRouter({
     {
       path: '/dbz',
       ...dbz
+    },
+    {
+      path: '/pokemon',
+      ...pokemon
     },
     { 
       path: '/:pathMatch(.*)*',

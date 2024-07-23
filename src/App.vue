@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-    <HomeLayout />
+    <HomeLayout/>
     <!-- <Test /> -->
     <!-- <ViewExample /> -->
     
