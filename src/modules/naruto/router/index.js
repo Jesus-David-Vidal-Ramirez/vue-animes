@@ -6,17 +6,17 @@ export default {
         {
             path: '',
             name: 'naruto',
-            component: () => import(/* webpackChunkName: "narutoPersonajes" */ '../pages/NarutoPersonajes.vue'),
+            component: () => import(/* webpackChunkName: "NarutoPersonajes" */ '../pages/NarutoPersonajes.vue'),
         },
         {
             path: '/clans',
             name: 'clans',
-            component: () => import(/* webpackChunkName: "narutoClans" */ '../pages/NarutoClans.vue'),
+            component: () => import(/* webpackChunkName: "NarutoClans" */ '../pages/NarutoClans.vue'),
         },
         {
             path: '/akatsuki',
             name: 'akatsuki',
-            component: () => import(/* webpackChunkName: "narutoAkatsuki" */ '../pages/NarutoAkatsuki.vue'),
+            component: () => import(/* webpackChunkName: "NarutoAkatsuki" */ '../pages/NarutoAkatsuki.vue'),
         },
         // Todo: o una pagina Not Found
         // { 
