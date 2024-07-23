@@ -25,3 +25,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+resource.md
+docker-compose.yml
+dockerfile.yml
+run.sh
+build.sh
