@@ -60,7 +60,7 @@
           <div class="d-flex flex-wrap" >
             <b-card v-for="personaje in personajes" :key="personaje.id"
               :title="personaje.name"
-              :img-src="personaje.images[0] ?? '/src/assets/img/no-image-available.png'"
+              :img-src="personaje.images[0] ?? '../public/img/no-image-available.png'"
               :img-alt="personaje.name"
               img-top
               tag="article"

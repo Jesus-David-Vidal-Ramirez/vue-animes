@@ -22,7 +22,7 @@
               </div>
 
               <div class="d-flex flex-wrap justify-content-around ">
-                <b-card v-for="item in akatsukis" :key="item.id" :title="item.name" :img-src="item.images[0] ?? '/src/assets/img/no-image-available.png'
+                <b-card v-for="item in akatsukis" :key="item.id" :title="item.name" :img-src="item.images[0] ?? '../public/img/no-image-available.png'
                   " :img-alt="item.name" img-top tag="article" class="mt-5 m-4">
 
                   <b-card-text>

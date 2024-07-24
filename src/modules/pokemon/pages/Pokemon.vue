@@ -26,7 +26,7 @@
                   v-for="item in pokemons" 
                   :key="item.id" 
                   :title="item.name" 
-                  :img-src="item.sprites.other.dream_world.front_default ?? '/src/assets/img/no-image-available.png'" 
+                  :img-src="item.sprites.other.dream_world.front_default ?? '../public/img/no-image-available.png'" 
                   :img-alt="item.name" 
                   img-top tag="article" 
                   class="mt-5 m-4">

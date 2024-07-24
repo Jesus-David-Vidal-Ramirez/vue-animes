@@ -5,7 +5,7 @@
       <b-card no-body class="m-2" style="max-width: 250px" v-for="(item, index) in personajes" :key="item.id">
         <h4>{{ item.name }}</h4>
         <b-card-img :src="item.image ??
-          '/src/assets/img/no-image-available.png'" :alt="item.name" :key="item.id" class="img rounded-0"></b-card-img>
+          '../public/img/no-image-available.png'" :alt="item.name" :key="item.id" class="img rounded-0"></b-card-img>
         <b-card-body>
           <b> KI {{ item.ki }} </b>
         </b-card-body>

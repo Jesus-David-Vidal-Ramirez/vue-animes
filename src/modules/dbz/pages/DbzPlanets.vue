@@ -18,7 +18,7 @@
                                     <h1> {{ item.name }}</h1>
                                     <span>Destruido: {{ item.isDestroyed ? 'Si' : 'No' }}</span>
                                     <b-card-img :src="item.image ??
-                                        '/src/assets/img/no-image-available.png'" :alt="item.name" :key="item.id"
+                                        '../public/img/no-image-available.png'" :alt="item.name" :key="item.id"
                                         class="img rounded-0"></b-card-img>
                                     <b-card-text class="pt-3">
                                         {{ item.description }}

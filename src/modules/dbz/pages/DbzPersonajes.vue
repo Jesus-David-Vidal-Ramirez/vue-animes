@@ -43,7 +43,7 @@
                     <b-col md="6" class="d-flex justify-content-center align-items-center">
                       <div>
                         <b-card-img :src="item.image ??
-                          '/src/assets/img/no-image-available.png'"
+                          '../public/img/no-image-available.png'"
                            :alt="item.name" :key="item.id"
                           class="img rounded-0"></b-card-img>
                       </div>
