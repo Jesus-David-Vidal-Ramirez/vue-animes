@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import NavBar from "@/modules/shared/components/NavBar.vue";
-import Test from "@/modules/shared/components/Test.vue";
 
 import naruto from '../modules/naruto/router';
 import dbz from '../modules/dbz/router';
