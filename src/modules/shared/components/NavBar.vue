@@ -62,7 +62,7 @@ export default {
     return {
       linksImage: [
         {
-          img: '../src/assets/img/main/naruto.png',
+          img: '@/src/assets/img/main/naruto.png',
           descripcion: "Naruto es una serie de manga escrita e ilustrada por Masashi Kishimoto. La obra narra la historia de un ninja adolescente llamado Naruto Uzumaki, quien aspira a convertirse en Hokage, líder de su aldea, con el propósito de ser reconocido como alguien importante dentro de la aldea y entre sus compañeros",
           alt: "Naruto",
           path: "/naruto",
@@ -70,7 +70,7 @@ export default {
           id: 1,
         },
         {
-          img: 'public/img/Dbz.png',
+          img: '@/src/assets/img/main/Dbz.png',
           descripcion: "Dragon Ball Z sigue la historia de Son Goku, un saiyajin que, en su vida adulta, defiende la Tierra de diversas amenazas.",
           alt: "Dragon Ball Z",
           path: "/dbz",
@@ -78,7 +78,7 @@ export default {
           id: 2,
         },
         {
-          img: '../src/assets/img/main/Pokemon.png',
+          img: '@/src/assets/img/main/Pokemon.png',
           descripcion: "sigue las aventuras de Ash, sus amigos y su grupo de criaturas lindas y sumamente hábiles.",
           alt: "Pokemon",
           path: "/pokemon",
