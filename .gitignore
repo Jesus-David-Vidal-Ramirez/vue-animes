@@ -28,6 +28,6 @@ dist-ssr
 
 resource.md
 docker-compose.yml
-dockerfile.yml
+Dockerfile
 run.sh
 build.sh
