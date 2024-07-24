@@ -47,11 +47,6 @@ export default {
         return {
             planets: [],
             search: "",
-
-            // personajes: [],
-            // imagen: 0,
-            // totalClanes: 0,
-            // img: "@/assets/img/naruto/clansNaruto.png",
         };
     },
 
