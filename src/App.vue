@@ -1,15 +1,15 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import HomeLayout from "@/modules/home/layouts/HomeLayout.vue";
-import Test from "@/modules/shared/components/test.vue";
-import ViewExample from "@/modules/shared/components/ViewExample.vue";
+// import Test from "@/modules/shared/components/test.vue";
+// import ViewExample from "@/modules/shared/components/ViewExample.vue";
 
 export default {
   name: "App",
   components: {
     HomeLayout,
-    Test,
-    ViewExample
+    // Test,
+    // ViewExample
     // : defineAsyncComponent(() => import(/* webpackChunkName: "Home" */ '@/modules/home/layouts/HomeLayout.vue'))
   },
 };
