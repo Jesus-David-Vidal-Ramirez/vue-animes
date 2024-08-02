@@ -5,7 +5,7 @@
       <div class="scrollarea m-4 p-3">
         <div v-if="clanes.error">
           <h3>
-            {{ clanes.error }}
+            Informacion no encontrada
           </h3>
         </div>
         <div>
@@ -43,7 +43,7 @@
 
         <!-- <Pagination/> -->
       </div>
-
+      <!-- Modal Donde se visualizan los miembros del clan -->
       <div>
         <b-modal id="modal-lg" size="lg" modal-cancel hide-footer>
           <template #modal-header>
@@ -60,7 +60,7 @@
           <div class="d-flex flex-wrap" >
             <b-card v-for="personaje in personajes" :key="personaje.id"
               :title="personaje.name"
-              :img-src="personaje.images[0] ?? '@/public/img/no-image-available.png'"
+              :img-src="personaje.images[0] ?? '@/../img/no-image-available.png'"
               :img-alt="personaje.name"
               img-top
               tag="article"
@@ -122,7 +122,6 @@ export default {
       const personajesArrResp = getPersonajesByIds(characters);
 
       if (personajesArrResp.error) return (this.personajes = personajesArrResp);
-
       
       this.personajes = [];
       this.clan = name;

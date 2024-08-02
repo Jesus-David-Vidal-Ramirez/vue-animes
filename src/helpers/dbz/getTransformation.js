@@ -9,34 +9,9 @@ const getTransformations = async () => {
   }
 };
 
-// const getPaginationPersonaje = async ( url) => {
-//   try {
-
-//     if( !url ) {
-//       return {
-//         error: true
-//       }
-//     }
-
-//     const personaje = await dbzapi.get(url);
-    
-//     if(!personaje.data){
-//       return {
-//         error: true
-//       }
-//     }
-
-//     return personaje.data;
-
-//   } catch (error) {
-//     return { error: "Error al cargar personajes" };
-//   }
-  
-// };
-
-const getTransformationsSearch = async ( name ) => {
+const getTransformationsSearch = async ( id ) => {
   try {
-    const transformations = await dbzapi.get(`/transformations?name=${name}`);
+    const transformations = await dbzapi.get(`/transformations/${id}`);
     return transformations.data;
   } catch (error) {
     return { error: "Error al cargar personajes" };
@@ -46,5 +21,4 @@ const getTransformationsSearch = async ( name ) => {
 export {
   getTransformations,
   getTransformationsSearch,
-    // getPaginationPersonaje,
 }

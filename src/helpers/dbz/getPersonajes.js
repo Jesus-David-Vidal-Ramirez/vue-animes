@@ -2,7 +2,7 @@ import dbzapi from "../../api/dbz/dbzApi";
 
 const getPersonajes = async () => {
   try {
-    const personaje = await dbzapi.get(`/characters?page=1&limit=20`);
+    const personaje = await dbzapi.get(`/characters?page=1&limit=10`);
     return personaje.data;
   } catch (error) {
     return { error: "Error al cargar personajes" };

@@ -6,6 +6,7 @@ const getPokemons = async () => {
     let pokemons = [];
     for (let index = 1; index <= 20; index++) {
       const pokemon = await pokemonApi.get(`/pokemon/${index}`);
+      console.log( pokemon);
       pokemons.push(
         pokemon.data
       );

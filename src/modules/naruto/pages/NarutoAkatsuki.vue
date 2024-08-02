@@ -4,8 +4,6 @@
     <div class="row d-block">
       <div class="col mb-5">
         <div class="row">
-
-
           <div class="col-12 d-flex justify-content-center">
             <div class="col-12">
               <InputSearch placeholder="Buscar Akatsuki" v-model="search" />
@@ -17,13 +15,13 @@
             <div class="content d-flex flex-wrap justify-content-around">
               <div v-if="akatsukis.error">
                 <h3>
-                  {{ akatsukis.error }}
+                  Informacion no encontrada
                 </h3>
               </div>
 
               <div class="d-flex flex-wrap justify-content-around ">
                 <b-card v-for="item in akatsukis" :key="item.id" :title="item.name" 
-                :img-src="item.images[0] ?? '@/public/img/no-image-available.png'" 
+                :img-src="item.images[0] ?? '@/../img/no-image-available.png'" 
                 :img-alt="item.name" img-top tag="article" class="mt-5 m-4">
 
                   <b-card-text>

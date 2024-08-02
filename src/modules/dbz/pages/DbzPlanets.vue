@@ -18,7 +18,7 @@
                                     <h1> {{ item.name }}</h1>
                                     <span>Destruido: {{ item.isDestroyed ? 'Si' : 'No' }}</span>
                                     <b-card-img :src="item.image ??
-                                        '../public/img/no-image-available.png'" :alt="item.name" :key="item.id"
+                                        '@/../img/no-image-available.png'" :alt="item.name" :key="item.id"
                                         class="img rounded-0"></b-card-img>
                                     <b-card-text class="pt-3">
                                         {{ item.description }}
@@ -57,54 +57,29 @@ export default {
 
             if (resp.error) return (this.planets = resp);
             this.planets = resp;
-            // this.totalClanes = this.clanes.total;
-            //   this.totalclaness =   Math.floor(this.clanes.total / 20)
 
         },
-
-        // async personajesByClan(item) {
-
-        //     const { characters, name } = item;
-        //     const personajesArrResp = getPersonajesByIds(characters);
-
-        //     if (personajesArrResp.error) return (this.personajes = personajesArrResp);
-
-
-        //     this.personajes = [];
-        //     this.clan = name;
-        //     personajesArrResp
-        //         .then((data) => {
-        //             data.forEach((personaje) => {
-        //                 this.personajes.push(personaje.data);
-        //             });
-        //         })
-        //         .catch((error) => {
-        //             console.error("Error al obtener los datos:", error);
-        //         });
-        // },
 
         async searchPlanetas(name) {
 
             const resp = await getPlanetasSearch(name);
             if (resp.error) return this.planets = resp;
-            
-            if( !resp.length && !resp.items ){
-                return this.planets = { error: true};
+
+            if (!resp.length && !resp.items) {
+                return this.planets = { error: true };
             }
             if (resp.items == undefined) {
                 this.planets = { items: resp, links: { previous: null, next: null } };
                 return this.planets;
             }
-            
+
             this.planets = { items: resp.items, links: { previous: null, next: null } };
         },
 
     },
     watch: {
         search(event) {
-
             this.searchPlanetas(event);
-
         }
     },
     mounted() {

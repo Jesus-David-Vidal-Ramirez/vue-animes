@@ -57,10 +57,6 @@ a.router-link-exact-active {
   border-left: 1px solid black;
 }
 
-// .menu {
-//   // margin-top: 25vh;
-// }
-
 .navbar {
   position: sticky;
   left: 35vh;
@@ -82,8 +78,6 @@ a.router-link-exact-active {
     z-index: 4;
     margin-top: -1rem;
     margin-bottom: 1rem;
-    // margin-top: 0px;
-    // margin-bottom: 0px;
   }
 
   .info {

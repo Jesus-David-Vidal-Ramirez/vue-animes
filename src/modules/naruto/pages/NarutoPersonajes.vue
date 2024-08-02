@@ -15,7 +15,7 @@
             <div class="content d-flex flex-wrap justify-content-around">
               <div v-if="personaje.error">
                 <h3>
-                  {{ personaje.error }}
+                  Informacion no encontrada
                 </h3>
               </div>
               <div>
@@ -25,7 +25,7 @@
                     <b-col md="6" class="d-flex justify-content-center align-items-center">
                       <div>
                         <b-card-img :src="item.images[imagen] ??
-                          '../public/img/no-image-available.png'" :alt="item.name" :key="item.id"
+                          '@/../img/no-image-available.png'" :alt="item.name" :key="item.id"
                           class="img rounded-0"></b-card-img>
                         <div v-if="item.images.length >= 2">
 
@@ -59,10 +59,8 @@
                           </p>
                         </b-card-text>
                         <b-card-footer class="h2 mb-0">
-                          <b-icon icon="exclamation-circle-fill" variant="secondary" class="m-2 icon-footer"></b-icon>
-                          <!-- <b-icon icon="heart-fill" variant="secondary" class="m-2 icon-footer"></b-icon> -->
-                          <!-- <b-icon icon="heart-fill" variant="secondary" class="m-2 icon-footer"></b-icon> -->
-                          <b-icon icon="heart-fill" :variant="getVariant(item.id)" class="m-2 icon-footer" @click="stateFavorite(item.id)" :id="item.id"></b-icon>
+                          <b-icon icon="heart-fill" :variant="getVariant(item.id)" class="m-2 icon-footer"
+                            @click="stateFavorite(item.id)" :id="item.id"></b-icon>
                         </b-card-footer>
                       </b-card-body>
                     </b-col>
@@ -128,11 +126,11 @@ export default {
 
     },
 
-    getVariant(index){
+    getVariant(index) {
       return this.variant[index] ? 'danger' : 'secondary';
     },
 
-    stateFavorite( index){
+    stateFavorite(index) {
       this.$set(this.variant, index, !this.variant[index]);
     },
 

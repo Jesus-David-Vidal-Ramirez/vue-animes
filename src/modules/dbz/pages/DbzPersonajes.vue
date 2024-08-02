@@ -1,9 +1,5 @@
 <template>
-
-
   <section class="container text-center">
-    
-    <!-- <b-card   v-for="(item, index) in personaje.characters" -->
     <div class="row d-block mt-5">
       <div class="col mb-5">
         <div class="row">
@@ -16,9 +12,18 @@
             ></Pagination>
           </div> -->
           <div>
-            
-            <button @click="prevPagination(personajes.links.previous)"> < </button>
-            <button @click="nextPagination(personajes.links.next)"> > </button>
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link previous" aria-label="Previous" @click="prevPagination(personajes.links.previous)">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link next" aria-label="Next" @click="nextPagination(personajes.links.next)">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
           </div>
           <div class="col-12 d-flex justify-content-center">
             <div class="col-8">
@@ -29,22 +34,20 @@
 
           <div class="col-md-12 derecha">
             <div class="content d-flex flex-wrap justify-content-around">
-
               <div v-if="!personajes.items">
                 <h3>
-                    Informacion Vacia
+                  Informacion no encontrada
                 </h3>
               </div>
 
               <div>
                 <b-card no-body class="m-4" style="max-width: 550px" v-for="(item, index) in personajes.items"
-                :key="item.id">
+                  :key="item.id">
                   <b-row no-gutters>
                     <b-col md="6" class="d-flex justify-content-center align-items-center">
                       <div>
                         <b-card-img :src="item.image ??
-                          '../public/img/no-image-available.png'"
-                           :alt="item.name" :key="item.id"
+                          '@/../img/no-image-available.png'" :alt="item.name" :key="item.id"
                           class="img rounded-0"></b-card-img>
                       </div>
                     </b-col>
@@ -55,18 +58,21 @@
                         <b-card-text v-if="item.description.length <= 400" class="pt-3">
                           {{ item.description }}
                         </b-card-text>
-                        
+
                         <b-card-text v-else class="pt-3">
-                          {{ item.description.slice(0,getSlice(item.id)) }}.
-                         <br>
-                          <span class="badge text-bg-info" @click="verDescripcion(item.id)" :id="item.id"> {{ getDescripcion(item.id) }} </span>
+                          {{ item.description.slice(0, getSlice(item.id)) }}.
+                          <br>
+                          <span class="badge text-bg-info" @click="verDescripcion(item.id)" :id="item.id"> {{
+                            getDescripcion(item.id) }} </span>
                         </b-card-text>
 
                         <b-card-footer class="h2 mb-0">
-                          <h6 class="mt-3">Poder Maximo: <span v-if="item.maxKi != 'unknown'">{{  item.maxKi }} </span> <span v-else>Desconocido</span> </h6>
-                          <h6>Poder Minimo:  <span v-if="item.ki != 'unknown'">{{  item.ki }} </span> <span v-else>Desconocido</span> </h6>
-                          <!-- <b-icon icon="exclamation-circle-fill" variant="secondary" class="m-2 icon-footer"></b-icon> -->
-                          <b-icon icon="heart-fill" :variant="getVariant(item.id)" class="m-2 icon-footer" @click="stateFavorite(item.id)" :id="item.id"></b-icon>
+                          <h6 class="mt-3">Poder Maximo: <span v-if="item.maxKi != 'unknown'">{{ item.maxKi }} </span>
+                            <span v-else>Desconocido</span> </h6>
+                          <h6>Poder Minimo: <span v-if="item.ki != 'unknown'">{{ item.ki }} </span> <span
+                              v-else>Desconocido</span> </h6>
+                          <b-icon icon="heart-fill" :variant="getVariant(item.id)" class="m-2 icon-footer"
+                            @click="stateFavorite(item.id)" :id="item.id"></b-icon>
                         </b-card-footer>
                       </b-card-body>
                     </b-col>
@@ -93,14 +99,7 @@ export default {
     Pagination,
   },
   props: {
-    // description:{
-    //   type: Boolean,
-    //   default: false
-    // }
-    // ver:{
-    //   type: String,
-    //   default: 'Ver Mas..'
-    // }
+
   },
   data() {
     return {
@@ -121,58 +120,47 @@ export default {
       if (resp.error) return this.personajes = resp;
 
       this.personajes = resp;
-      // this.totalPersonajes = this.personajes.total;
-      //   this.totalPersonajes =   Math.floor(this.personaje.total / 20)
-      console.log({ personaje: this.personajes });
     },
 
-    async nextPagination( url ) {
+    async nextPagination(url) {
 
-      const data = await getPaginationPersonaje( url);
-      
-      // TODO enviar alerta de que no hay personajes
+      const data = await getPaginationPersonaje(url);
+
       if (data.error) return "";
-      
       this.personajes = data;
-      
-      console.log( this.personajes );    
+
     },
 
-    async prevPagination( url ) {
-      
-      const data = await getPaginationPersonaje( url);
-      
-      // TODO enviar alerta de que no hay personajes
+    async prevPagination(url) {
+
+      const data = await getPaginationPersonaje(url);
+
       if (data.error) return "";
-      
-      this.personajes = data;  
-      
+
+      this.personajes = data;
+
     },
 
-    getSlice(index){
-      return this.slice[index] ? -1 : 400 ;
+    getSlice(index) {
+      return this.slice[index] ? -1 : 400;
     },
 
-    getDescripcion( index ){
+    getDescripcion(index) {
       return this.ver[index] ? 'Ver Menos' : 'Ver Mas...';
     },
-    
-    verDescripcion( index ){
+
+    verDescripcion(index) {
       this.$set(this.slice, index, !this.slice[index]);
       this.$set(this.ver, index, !this.ver[index]);
     },
 
-    getVariant(index){
+    getVariant(index) {
       return this.variant[index] ? 'danger' : 'secondary';
     },
 
-    stateFavorite( index){
+    stateFavorite(index) {
       this.$set(this.variant, index, !this.variant[index]);
     },
-
-  //   nextImagen(index) {
-  //     this.personaje.characters[index].images.reverse()[0];
-  //   },
 
     // Recbimos el nombre para la comparacion
     async searchPersonajes(name) {
@@ -180,31 +168,16 @@ export default {
       const resp = await getPersonajeSearch(name);
       console.log({ respuesta: resp });
       if (resp.error) return this.personajes = resp;
-      
-      // const personajes = [];
-      // personajes.push(resp);
-      // console.log(personajes);
 
-      this.personajes = {items: resp, links: {previous:null,next:null} };
-      
-      console.log( this.personajes );
-      
-      
+      this.personajes = { items: resp, links: { previous: null, next: null } };
 
-
-      // this.totalPersonajes = this.personaje.total;
-
-      // console.log({ personaje: this.personaje });
     },
-
 
   },
 
   watch: {
     search(event) {
-      console.log( event);
       this.searchPersonajes(event);
-      
     }
   },
 
@@ -244,7 +217,7 @@ export default {
 }
 
 .badge {
-  cursor:pointer;
+  cursor: pointer;
   margin-top: 1.5em;
   transform: scale(1.1);
 }
@@ -252,6 +225,24 @@ export default {
 .badge:hover {
   transform: scale(1.2);
 }
+
+.pagination {
+  cursor: pointer;
+  margin-top: 1.5em;
+  transform: scale(1.1);
+}
+
+.next:hover {
+  transform: scale(1.2);
+}
+
+.previous:hover {
+  transform: scale(1.2);
+}
+
+// .previous:hover {
+//   transform: scale(1.2);
+// }
 
 @media (max-width: 769px) {
 
